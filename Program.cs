@@ -54,8 +54,6 @@ namespace OOP_3
                 {
                     Console.WriteLine("can you enter a logical degree?");
                     goto insert_mark;
-
-
                 }
                 list.Add(new Student { Id = id, Name = name, Mark = mark});
 
