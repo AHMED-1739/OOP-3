@@ -48,9 +48,15 @@ namespace OOP_3
                 string id= Console.ReadLine();  
                 
                 Console.WriteLine("the mark:");
-                
-                double mark = Convert.ToDouble(Console.ReadLine());
-                
+
+                insert_mark: double mark = Convert.ToDouble(Console.ReadLine());
+                if(mark <0&& mark>100)
+                {
+                    Console.WriteLine("can you enter a logical degree?");
+                    goto insert_mark;
+
+
+                }
                 list.Add(new Student { Id = id, Name = name, Mark = mark});
 
                 counter++;
