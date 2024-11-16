@@ -13,11 +13,9 @@ namespace OOP_3_Q2
     class UserAccount
     {
         private string User_Name, User_Password, User_Email;
-
         public string UserName => User_Name;
         public string UserPassword => User_Password;
         public string UserEmail => User_Email;
-
         //this constructor to create new Account
         public UserAccount(string User_Name, string User_Password, string User_Email)
         {
@@ -25,32 +23,27 @@ namespace OOP_3_Q2
             this.User_Password = User_Password;
             this.User_Email = User_Email;
         }
+        //copy constructor
         public UserAccount(UserAccount Account)
         {
             User_Name=Account.UserName;
             User_Email = Account.UserEmail;
             User_Password =Account.UserPassword;
         }
-        public void Change_Password(string new_pass)
-        {
-            this.User_Password = new_pass;
-        }
+        // to change the password 
+        public void Change_Password(string new_pass) => this.User_Password = new_pass;
+        //Check if the account existing
         static public UserAccount Check_Account(UserAccount account, string pass, string userName)
         {
             if (account.UserPassword == pass && account.UserName == userName)
                  return account;
-
-                return null;
+                 return null;
         }
-        
-
     }
     internal class Program
     {
-  
         static void Main(string[] args)
         {
-
             ArrayList Account_List = new ArrayList();
             // create some account
             char c = '1';
@@ -65,6 +58,8 @@ namespace OOP_3_Q2
             Console.Write("Password: ");
             string pass= Console.ReadLine();
 
+            //this object will hold thee user account to handle its data
+            //(if both the password and the username match the information of one of the accounts.)
             UserAccount UserAccount=null;
 
             for (int i = 0; i < Account_List.Count; i++)
@@ -75,14 +70,14 @@ namespace OOP_3_Q2
                     Console.WriteLine("Information verified.\n");
                     UserAccount = new UserAccount(UserAccount.Check_Account(Account,pass,userName));
                     break;
-                } 
-                if(i==Account_List.Count - 1)
-                    Console.WriteLine("The information is invalid");
+                }
+                if (i == Account_List.Count - 1)
+                { Console.WriteLine("The information is invalid"); break; }
             }
             if (UserAccount != null)
             {
                 Console.WriteLine("Do you want to change your password ? yes or no");
-              input: string input = Console.ReadLine();
+            input: string input = Console.ReadLine();
                 input = input.ToLower();
                 if (input == "yes")
                 {
@@ -92,14 +87,19 @@ namespace OOP_3_Q2
                 }
                 else if (input == "no")
                     Console.WriteLine("OK");
-                else 
-                { 
+                else
+                {
                     Console.WriteLine("choss yes or no!");
-                    goto input;
+                    goto input;//line81
                 }
             }
-            Console.WriteLine("Information after change:");
-            Console.WriteLine("Name: {0}\nPassword:{1}",UserAccount.UserName,UserAccount.UserPassword);
+                Console.WriteLine("Information after change:");
+                Console.WriteLine("Name: {0}\nPassword:{1}", UserAccount.UserName, UserAccount.UserPassword);
+             
+
+
+
+
         }
     }
 }
