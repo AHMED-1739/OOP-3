@@ -42,6 +42,10 @@ namespace OOP_3_Q2
     }
     internal class Program
     {
+        //I avoid putting conditions like checking the length of
+        //the username and password and other things
+        //because the current code is sufficient for the question.
+        //and it will be a long code.
         static void Main(string[] args)
         {
             ArrayList Account_List = new ArrayList();
@@ -52,29 +56,38 @@ namespace OOP_3_Q2
                 Account_List.Add(new UserAccount("Test_Name" + c, "Test_Pass" + c, $" Test_Email{c}@email.com"));
                  c++;
             }
-            Console.WriteLine("Enter information to verify");
-            Console.Write("User Name: ");
-            string userName = Console.ReadLine();
-            Console.Write("Password: ");
-            string pass= Console.ReadLine();
-
+            string userName, pass;
+            while (true)
+            {
+                Console.WriteLine("Enter information to verify");
+                Console.Write("User Name: ");
+                 userName = Console.ReadLine();
+                Console.Write("Password: ");
+                 pass = Console.ReadLine();
+                if (userName == "" || pass == "")
+                {
+                    Console.WriteLine("Username or password cannot be empty.");
+                }
+                else break;
+            }
             //this object will hold thee user account to handle its data
             //(if both the password and the username match the information of one of the accounts.)
-            UserAccount UserAccount=null;
+            UserAccount Correct_Account=null;
 
             for (int i = 0; i < Account_List.Count; i++)
             {
                 UserAccount Account = (UserAccount)Account_List[i];
-                if (UserAccount.Check_Account(Account, pass, userName) != null)
+                   UserAccount temp=UserAccount.Check_Account(Account, pass, userName);
+                if (temp != null)
                 {
                     Console.WriteLine("Information verified.\n");
-                    UserAccount = new UserAccount(UserAccount.Check_Account(Account,pass,userName));
+                    Correct_Account = new UserAccount(temp);
                     break;
                 }
                 if (i == Account_List.Count - 1)
                 { Console.WriteLine("The information is invalid"); break; }
             }
-            if (UserAccount != null)
+            if (Correct_Account != null)
             {
                 Console.WriteLine("Do you want to change your password ? yes or no");
             input: string input = Console.ReadLine();
@@ -83,23 +96,18 @@ namespace OOP_3_Q2
                 {
                     Console.Write("Enter the new password: ");
                     string new_pass = Console.ReadLine();
-                    UserAccount.Change_Password(new_pass);
+                    Correct_Account.Change_Password(new_pass);
                 }
                 else if (input == "no")
                     Console.WriteLine("OK");
                 else
                 {
                     Console.WriteLine("choss yes or no!");
-                    goto input;//line81
+                    goto input;//line93
                 }
-            }
                 Console.WriteLine("Information after change:");
-                Console.WriteLine("Name: {0}\nPassword:{1}", UserAccount.UserName, UserAccount.UserPassword);
-             
-
-
-
-
+                Console.WriteLine("Name: {0}\nPassword:{1}", Correct_Account.UserName, Correct_Account.UserPassword);
+           }
         }
     }
 }
