@@ -18,6 +18,11 @@ namespace OOP_3
         {
             int counter = 0;
          
+            //is it work?
+            //will see 
+
+
+
             List<Student> list = new List<Student>();
             while (true)
             {  
