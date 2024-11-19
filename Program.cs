@@ -89,25 +89,32 @@ namespace OOP_3_Q2
             }
             if (Correct_Account != null)
             {
-                Console.WriteLine("Do you want to change your password ? yes or no");
-            input: string input = Console.ReadLine();
-                input = input.ToLower();
-                if (input == "yes")
+                while (true)
                 {
-                    Console.Write("Enter the new password: ");
-                    string new_pass = Console.ReadLine();
-                    Correct_Account.Change_Password(new_pass);
+                    Console.WriteLine("Do you want to change your password ? yes or no");
+                    string input = Console.ReadLine();
+                    input = input.ToLower();
+                    if (input == "yes")
+                    {
+                        Console.Write("Enter the new password: ");
+                        string new_pass = Console.ReadLine();
+                        Correct_Account.Change_Password(new_pass);
+                    }
+                    else if (input == "no")
+                        Console.WriteLine("OK");
+                    else
+                    {
+                        Console.Clear();
+                        Console.WriteLine("choss yes or no!");
+                  
+                        continue;
+                    }
+
+                    Console.WriteLine("Information after change:");
+                    Console.WriteLine("Name: {0}\nPassword:{1}", Correct_Account.UserName, Correct_Account.UserPassword);
+                    break;
                 }
-                else if (input == "no")
-                    Console.WriteLine("OK");
-                else
-                {
-                    Console.WriteLine("choss yes or no!");
-                    goto input;//line93
-                }
-                Console.WriteLine("Information after change:");
-                Console.WriteLine("Name: {0}\nPassword:{1}", Correct_Account.UserName, Correct_Account.UserPassword);
-           }
+            }
         }
     }
 }
